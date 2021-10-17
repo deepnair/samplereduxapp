@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# Redux sample app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This was made baed on a tutorial by Laith Harb at [React Redux (with hooks) Crash course](https://www.youtube.com/watch?v=9jULHSe41ls)
 
-## Available Scripts
+### Approach
+---
+1. First create a simple react app called 'reduxsampleapp' with 
+    ```
+    npx create-react-app reduxsampleapp
+    ```
+1. Then create a folder called 'state' in the src folder of the app
+1. In the state folder create a folder called reducers. Here's where the reducers will stay. The reducers determine how the state will be changed.
+    * Write the accountReducer function in a file called accountReducer.js, export it . 
+    * Then in an index.js file in the reducers folder. Use {combineReducers} from redux to then export the combinedReducers.
+1. Create a store.js file in the state folder. Use {createStore} form redux to create a const store that takes in the reducers, {} (an empty object), install thunk
+    ```
+    npm i react-thunk
+    ```
+    * Import thunk from react-thunk and use it along with the imported {applyMiddleWare} from redux as the final parameter in createStore.
+    *Export const store as well.
+1. Create a folder in state called action-creators. Create an index.js in it. Create the action-creator functions in it with dispatch and export them.
+1. In the state folder create an index.js and write the following
+    ```
+    export * as actionCreators from './action-creators/index'
+    ```
+1. Now in the index.js in src, import {Provider} from 'react-redux', import store from ./store.js. Wrap the App component with the Provider component and set the source property in it to {source}.
+1. Now in the App.js import {useSelector, useDispatch} from react-redux. Import {bindActionCreators} from redux. Import actionCreators from ./action-creators/index.
+1. Set const account equal to useSelector and set state to the 'account' key of state (since that is the state we want).
+1. Set const dispath equal to useDispatch().
+1. Finally destructure the actionCreators and set it equal to bindActionCreators(actionCreators, dispatch).
+1. Now use const account for the state and the destructured actionCreators to modify the state.
 
-In the project directory, you can run:
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
